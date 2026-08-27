@@ -4,11 +4,12 @@ import { HttpServiceService } from '../http-service.service';
 
 @Component({
   selector: 'app-signup',
-  templateUrl: './signup.component.html'
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
 
-  endpoint = "http://localhost:8080/Auth/signUp";
+    endpoint = "http://localhost:8080/Auth/signUp";
 
   form: any = {
     error: false,

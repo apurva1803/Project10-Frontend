@@ -12,7 +12,8 @@ export class NavbarComponent {
   endpoint = "http://localhost:8080/Auth/";
 
   form: any = {
-    data: {}
+    data: {},
+    message : ''
   }
 
   constructor(private httpService: HttpServiceService, private router: Router, private servicelocator: ServiceLocatorService) {
@@ -33,9 +34,12 @@ export class NavbarComponent {
   logout() {
     var _self = this;
     this.httpService.get(this.endpoint + 'logout', function (res: any) {
+      
       localStorage.clear();
-      _self.router.navigateByUrl('login')
+      _self.router.navigateByUrl('login?message=user logout successfully')
+      
     });
+    
   }
 
   forward() {

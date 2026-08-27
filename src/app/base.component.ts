@@ -1,11 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Directive, OnInit } from "@angular/core";
 import { ServiceLocatorService } from "./service-locator.service";
 import { ActivatedRoute } from "@angular/router";
 
 
-@Component({
-    template: ''
-})
+@Directive()
 export class BaseCtl implements OnInit {
 
     public form: any = {
@@ -41,49 +39,39 @@ export class BaseCtl implements OnInit {
     constructor(public endpoint: String, public serviceLocator: ServiceLocatorService, public route: ActivatedRoute) {
         var _self = this;
         _self.initApi(endpoint);
-
-        serviceLocator.getPathVariable(route, function (params: any) {
-            _self.form.data.id = params["id"];
-        })
     }
 
     ngOnInit(): void {
+        console.log("ngOnInit called");
         this.preload();
-        if (this.form.data.id && this.form.data.id > 0) {
+
+        const id = this.route.snapshot.paramMap.get('id');
+        if (id) {
+            this.form.data.id = Number(id);
             this.display();
         }
     }
 
     preload() {
+        console.log("PRELOAD METHOD CALLED");
         var _self = this;
         this.serviceLocator.httpService.get(_self.api.preload, function (res: any) {
             if (res.success) {
+                console.log(res.result)
                 _self.form.preload = res.result;
-            } else {
-                _self.form.error = true;
-                _self.form.message = res.result.message;
+                console.log(_self.form.preload.roleList)
             }
         });
     }
 
-    display() {
-        var _self = this;
-        this.serviceLocator.httpService.get(_self.api.get + "/" + _self.form.data.id, function (res: any) {
-            if (res.success) {
-                _self.form.data = res.result.data;
-            } else {
-                _self.form.error = true;
-                _self.form.message = res.result.message;
-            }
-        });
-    }
-
+    
     submit() {
         var _self = this;
         this.serviceLocator.httpService.post(this.api.save, this.form.data, function (res: any) {
             _self.form.message = '';
             _self.form.inputerror = {};
             if (res.success) {
+                _self.form.error = false;
                 _self.form.message = res.result.message;
                 _self.form.data.id = res.result.data;
             } else {
@@ -95,7 +83,6 @@ export class BaseCtl implements OnInit {
             }
         });
     }
-
     search() {
         var _self = this;
         this.serviceLocator.httpService.post(_self.api.search + "/" + _self.form.pageNo, _self.form.searchParams, function (res: any) {
@@ -128,12 +115,23 @@ export class BaseCtl implements OnInit {
             }
         });
     }
-
+    
     forward(page: any) {
         this.serviceLocator.forward(page);
     }
 
     reset() {
         location.reload();
+    }
+    display() {
+        var _self = this;
+        this.serviceLocator.httpService.get(_self.api.get + "/" + _self.form.data.id, function (res: any) {
+            if (res.success) {
+                _self.form.data = res.result.data;
+            } else {
+                _self.form.error = true;
+                _self.form.message = res.result.message;
+            }
+        });
     }
 }

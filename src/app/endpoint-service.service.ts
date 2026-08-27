@@ -6,7 +6,6 @@ import { Injectable } from '@angular/core';
 export class EndpointServiceService {
 
   constructor() { }
-
   public SERVER_URL = "http://localhost:8080";
   public USER = this.SERVER_URL + "/User";
   public ROLE = this.SERVER_URL + "/Role";
@@ -17,5 +16,4 @@ export class EndpointServiceService {
   public COURSE = this.SERVER_URL + "/Course";
   public TIMETABLE = this.SERVER_URL + "/TimeTable";
   public FACULTY = this.SERVER_URL + "/Faculty";
-  
 }

@@ -5,11 +5,13 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-timetable',
-  templateUrl: './timetable.component.html'
+  templateUrl: './timetable.component.html',
+  styleUrls: ['./timetable.component.css']
 })
-export class TimetableComponent extends BaseCtl{
+export class TimetableComponent extends BaseCtl {
 
-    constructor(public locator: ServiceLocatorService, route: ActivatedRoute) {
+  constructor(public locator: ServiceLocatorService, route: ActivatedRoute) {
     super(locator.endpoints.TIMETABLE, locator, route);
-    }
+  }
+
 }

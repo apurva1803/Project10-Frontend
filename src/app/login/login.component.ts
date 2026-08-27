@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpServiceService } from '../http-service.service';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
 
@@ -13,11 +14,22 @@ export class LoginComponent {
   form: any = {
     error: false,
     message: '',
-    data: { id: null },
+    data: { },
     inputerror: {},
+    messsage : ""
   };
 
-  constructor(private httpService: HttpServiceService, private router: Router) {
+  constructor(private httpService: HttpServiceService, private router: Router, private activatedRoute : ActivatedRoute) {
+
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params['message']) {
+        this.form.message = params['message'];
+      }
+      if (params['errorMessage']) {
+        this.form.message = params['errorMessage'];
+        this.form.error = true;
+      }
+    });
   }
 
   signIn() {
@@ -27,13 +39,12 @@ export class LoginComponent {
       _self.form.message = '';
       _self.form.inputerror = {};
 
-      if (res.result.message) {
-        _self.form.message = res.result.message;
-      }
-
       _self.form.error = !res.success;
-      if (_self.form.error && res.result.inputerror) {
-        _self.form.inputerror = res.result.inputerror;
+      if (_self.form.error) {
+        _self.form.message = res.result?.message || res.message || 'Invalid login ID or password.';
+        if (res.result?.inputerror) {
+          _self.form.inputerror = res.result.inputerror;
+        }
       }
 
       if (res.success) {
@@ -52,4 +63,6 @@ export class LoginComponent {
   signUp() {
     this.router.navigateByUrl('signup');
   }
+
+
 }
