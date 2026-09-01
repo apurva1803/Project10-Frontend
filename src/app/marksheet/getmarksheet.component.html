@@ -1,0 +1,292 @@
+<app-navbar></app-navbar>
+
+<div class="container py-4" style="max-width: 900px;">
+
+    <!-- Search Card -->
+    <div class="card shadow-sm border-10 rounded-4 mb-4">
+
+        <div class="card-header text-white py-3"
+            style="background: linear-gradient(135deg,#0d2137 0%,#1565c0 100%);">
+
+            <h5 class="mb-0">
+                <i class="bi bi-search me-2"></i>
+                Get Marksheet
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+           <!-- Error Message -->
+        <div class="alert alert-danger py-2 mx-3 mt-3 d-flex justify-content-between align-items-center"
+            *ngIf="form.error && form.message">
+
+            <span>
+                <i class="bi bi-exclamation-circle-fill me-2"></i>
+                {{form.message}}
+            </span>
+
+            <button type="button" class="btn-close" (click)="form.message=''">
+            </button>
+
+        </div>
+
+        <!-- Success Message -->
+        <div class="alert alert-success py-2 mx-3 mt-3 d-flex justify-content-between align-items-center"
+            *ngIf="!form.error && form.message">
+
+            <span>
+                <i class="bi bi-check-circle-fill me-2"></i>
+                {{form.message}}
+            </span>
+
+            <button type="button" class="btn-close" (click)="form.message=''">
+            </button>
+
+        </div>
+
+            <form (ngSubmit)="go()">
+
+                <div class="row align-items-end">
+
+                    <div class="col-md-9">
+
+                        <label class="form-label fw-bold">
+                            Roll No
+                        </label>
+
+                        <input type="text"
+                            class="form-control"
+                            name="rollNo"
+                            [(ngModel)]="form.data.rollNo"
+                            placeholder="Enter Roll No">
+
+                        <div class="text-danger small">
+                            {{form.inputerror.rollNo}}
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3 mt-3 mt-md-0">
+
+                        <button type="submit"
+                            class="btn btn-primary w-100">
+
+                            <i class="bi bi-search me-2"></i>
+                            Search
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- Marksheet -->
+    <div *ngIf="form.list && form.list.rollNo"
+        class="card shadow-lg border-10 rounded-4">
+
+        <div class="card-body p-5">
+
+            <!-- Header -->
+            <div class="text-center border-bottom pb-3 mb-4">
+
+                <h2 class="fw-bold text-primary">
+                    ONLINE RESULT SYSTEM
+                </h2>
+
+                <h5 class="text-secondary">
+                    STUDENT MARKSHEET
+                </h5>
+
+            </div>
+
+            <!-- Student Details -->
+            <div class="row mb-4">
+
+                <div class="col-md-6">
+                    <strong>Roll No :</strong>
+                    {{form.list.rollNo}}
+                </div>
+
+                <div class="col-md-6 text-md-end">
+                    <strong>Name :</strong>
+                    {{form.list.name}}
+                </div>
+
+            </div>
+
+            <!-- Marks Table -->
+            <table class="table table-bordered text-center">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>Subject</th>
+                        <th>Marks Obtained</th>
+                        <th>Maximum Marks</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>Physics</td>
+                        <td>{{form.list.physics}}</td>
+                        <td>100</td>
+
+                        <td>
+
+                            <span
+                                [class]="form.list.physics >= 33 ? 'badge bg-success' : 'badge bg-danger'">
+
+                                {{form.list.physics >= 33 ? 'Pass' : 'Fail'}}
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>Chemistry</td>
+                        <td>{{form.list.chemistry}}</td>
+                        <td>100</td>
+
+                        <td>
+
+                            <span
+                                [class]="form.list.chemistry >= 33 ? 'badge bg-success' : 'badge bg-danger'">
+
+                                {{form.list.chemistry >= 33 ? 'Pass' : 'Fail'}}
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>Maths</td>
+                        <td>{{form.list.maths}}</td>
+                        <td>100</td>
+
+                        <td>
+
+                            <span
+                                [class]="form.list.maths >= 33 ? 'badge bg-success' : 'badge bg-danger'">
+
+                                {{form.list.maths >= 33 ? 'Pass' : 'Fail'}}
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+            <!-- Summary -->
+            <div class="row mt-4">
+
+                <div class="col-md-4">
+
+                    <div class="card bg-light border-0">
+
+                        <div class="card-body text-center">
+
+                            <h6>Total Marks</h6>
+
+                            <h4 class="fw-bold">
+
+                                {{form.list.physics +
+                                form.list.chemistry +
+                                form.list.maths}}
+
+                            </h4>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 mt-3 mt-md-0">
+
+                    <div class="card bg-light border-0">
+
+                        <div class="card-body text-center">
+
+                            <h6>Percentage</h6>
+
+                            <h4 class="fw-bold text-primary">
+
+                                {{((form.list.physics +
+                                form.list.chemistry +
+                                form.list.maths) * 100 / 300)
+                                | number:'1.2-2'}}%
+
+                            </h4>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 mt-3 mt-md-0">
+
+                    <div class="card bg-light border-0">
+
+                        <div class="card-body text-center">
+
+                            <h6>Result</h6>
+
+                            <h4>
+
+                                <span
+                                    *ngIf="form.list.physics >= 33 &&
+                                           form.list.chemistry >= 33 &&
+                                           form.list.maths >= 33"
+                                    class="badge bg-success">
+
+                                    PASS
+
+                                </span>
+
+                                <span
+                                    *ngIf="form.list.physics < 33 ||
+                                           form.list.chemistry < 33 ||
+                                           form.list.maths < 33"
+                                    class="badge bg-danger">
+
+                                    FAIL
+
+                                </span>
+
+                            </h4>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<app-footer></app-footer>

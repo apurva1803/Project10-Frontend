@@ -27,6 +27,23 @@ export class HttpServiceService {
     });
   }
 
+  getReport(url: string, token: string) {
+    this.httpClient
+      .get(url, {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+        responseType: 'blob',
+      })
+      .subscribe((res: any) => {
+        const file = new Blob([res], { type: 'application/pdf' });
+        const fileURL = URL.createObjectURL(file);
+        window.open(fileURL);
+      }, (error) => {
+        this.handleError(error);
+      });
+  }
+
   private handleError(error: any): void {
     console.error('Request failed', error);
     if (error.status === 401) {

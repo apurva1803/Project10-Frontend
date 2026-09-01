@@ -36,6 +36,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './login/signup.component';
 import { ForgotpasswordComponent } from './login/forgotpassword.component';
+import { MarksheetmeritlistComponent } from './marksheet/marksheetmeritlist.component';
+import { GetmarksheetComponent } from './marksheet/getmarksheet.component';
+import { ChangepasswordComponent } from './user/changepassword.component';
+import { MyprofileComponent } from './user/myprofile.component';
 
 
 @NgModule({
@@ -65,7 +69,11 @@ import { ForgotpasswordComponent } from './login/forgotpassword.component';
     DashboardComponent,
     LoginComponent,
     SignupComponent,
-    ForgotpasswordComponent
+    ForgotpasswordComponent,
+    MarksheetmeritlistComponent,
+    GetmarksheetComponent,
+    ChangepasswordComponent,
+    MyprofileComponent
   ],
   imports: [
     BrowserModule,
