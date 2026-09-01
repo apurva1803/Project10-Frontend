@@ -83,6 +83,14 @@ export class BaseCtl implements OnInit {
             }
         });
     }
+    getRole(): string {
+        return (localStorage.getItem('role') || '').trim().toLowerCase();
+    }
+
+    isStudentRole(): boolean {
+        return this.getRole() === 'student';
+    }
+
     search() {
         var _self = this;
         this.serviceLocator.httpService.post(_self.api.search + "/" + _self.form.pageNo, _self.form.searchParams, function (res: any) {

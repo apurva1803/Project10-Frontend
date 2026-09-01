@@ -26,14 +26,16 @@ export class ForgotpasswordComponent {
 
       _self.form.message = '';
       _self.form.inputerror = {};
-
-      if (res.result.message) {
-        _self.form.message = res.result.message;
-      }
-
       _self.form.error = !res.success;
-      if (_self.form.error && res.result.inputerror) {
+
+      if (res.success) {
+        _self.form.message = 'Password sent to your email';
+      } else if (res.result?.inputerror) {
         _self.form.inputerror = res.result.inputerror;
+      } else if (res.message) {
+        _self.form.message = res.message;
+      } else {
+        _self.form.message = 'Unable to send reset link. Please try again.';
       }
     });
   }

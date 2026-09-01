@@ -41,7 +41,9 @@ export class LoginComponent {
 
       _self.form.error = !res.success;
       if (_self.form.error) {
-        _self.form.message = res.result?.message || res.message || 'Invalid login ID or password.';
+        if (!res.result?.inputerror) {
+          _self.form.message = res.result?.message || res.message || 'Invalid login ID or password.';
+        }
         if (res.result?.inputerror) {
           _self.form.inputerror = res.result.inputerror;
         }

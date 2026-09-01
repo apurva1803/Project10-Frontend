@@ -8,9 +8,9 @@
 
 .login-layout {
 	display: grid;
-	grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
-	width: min(100%, 980px);
-	min-height: 570px;
+	grid-template-columns: minmax(0, .8fr) minmax(420px, 1.2fr);
+	width: min(100%, 1040px);
+	min-height: 620px;
 	overflow: hidden;
 	background: var(--ors-surface);
 	border: 1px solid var(--ors-border);
@@ -20,7 +20,7 @@
 
 .login-intro {
 	position: relative;
-	padding: clamp(2rem, 5vw, 4rem);
+	padding: clamp(1.5rem, 3vw, 2.5rem);
 	color: #fff;
 	background: linear-gradient(145deg, #17324d 0%, #225d83 70%, #237f83 100%);
 	isolation: isolate;
@@ -80,7 +80,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	padding: clamp(2rem, 5vw, 4rem);
+	padding: clamp(2.5rem, 5vw, 5rem);
 }
 
 .login-panel-heading h2 {
@@ -97,6 +97,7 @@
 
 .login-form {
 	margin-top: 2rem;
+	width: min(100%, 440px);
 }
 
 .login-form .form-label {
@@ -112,8 +113,14 @@
 }
 
 .login-form .form-control {
-	min-height: 2.75rem;
+	min-height: 3.1rem;
 	border-color: #c7d5e2;
+}
+
+.login-form .btn-primary {
+	min-height: 3.1rem;
+	font-size: 1rem;
+	font-weight: 600;
 }
 
 .login-secondary-actions {

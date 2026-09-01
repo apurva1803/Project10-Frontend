@@ -11,4 +11,33 @@ export class DashboardComponent {
     const firstName = localStorage.getItem('fname');
     return firstName !== 'null' && firstName !== null;
   }
+
+  getRole(): string {
+    return (localStorage.getItem('role') || '').trim().toLowerCase();
+  }
+
+  canAccess(moduleName: string): boolean {
+    const role = this.getRole();
+
+    if (role === 'admin') {
+      return true;
+    }
+
+    if (role === 'college') {
+      return ['college', 'student', 'marksheet', 'course', 'subject', 'timetable', 'faculty']
+        .includes(moduleName);
+    }
+
+    if (role === 'faculty') {
+      return ['student', 'subject', 'marksheet', 'timetable']
+        .includes(moduleName);
+    }
+
+    if (role === 'student') {
+      return ['subject', 'marksheet', 'timetable']
+        .includes(moduleName);
+    }
+
+    return false;
+  }
 }

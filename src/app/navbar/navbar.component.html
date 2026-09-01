@@ -29,27 +29,29 @@
          id="mainNav"
          *ngIf="isLogin()">
 
-         <!-- User Name -->
-         <div class="navbar-brand text-white mb-0">
+         <div class="d-flex align-items-center w-100">
 
-            <div class="fw-bold fs-5">
-               Welcome, {{form.data.fname}}
+            <!-- User Name -->
+            <div class="navbar-brand text-white mb-0 me-3">
+
+               <div class="fw-bold fs-5">
+                  Welcome, {{form.data.fname}}
+               </div>
+
+               <small class="text-light opacity-75">
+                  {{form.data.role}}
+               </small>
+
             </div>
 
-            <small class="text-light opacity-75">
-               {{form.data.role}}
-            </small>
 
-         </div>
+            <!-- ================= MENU ================= -->
 
-
-         <!-- ================= MENU ================= -->
-
-         <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav align-items-center me-auto" style="gap: 0.1rem; margin-left: 0; white-space: nowrap; flex-wrap: nowrap;">
 
 
             <!-- ROLE -->
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" *ngIf="canAccess('role')">
 
                <a class="nav-link dropdown-toggle text-white px-3 py-3"
                   href="#"
@@ -89,7 +91,7 @@
 
 
             <!-- USER -->
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" *ngIf="canAccess('user')">
 
                <a class="nav-link dropdown-toggle text-white px-3 py-3"
                   href="#"
@@ -129,7 +131,7 @@
 
 
             <!-- COLLEGE -->
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" *ngIf="canAccess('college')">
 
                <a class="nav-link dropdown-toggle text-white px-3 py-3"
                   href="#"
@@ -169,7 +171,7 @@
 
 
             <!-- STUDENT -->
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" *ngIf="canAccess('student')">
 
                <a class="nav-link dropdown-toggle text-white px-3 py-3"
                   href="#"
@@ -209,11 +211,12 @@
 
 
             <!-- MARKSHEET -->
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown d-flex align-items-center" *ngIf="canAccess('marksheet')">
 
                <a class="nav-link dropdown-toggle text-white px-3 py-3"
                   href="#"
-                  data-bs-toggle="dropdown">
+                  data-bs-toggle="dropdown"
+                  style="white-space: nowrap;">
 
                   <i class="bi bi-file-earmark-text me-1"></i>
                   Marksheet
@@ -223,7 +226,7 @@
                <ul class="dropdown-menu dropdown-menu-dark shadow border-0 rounded-3"
                   style="background:#1a2e4a">
 
-                  <li>
+                  <li *ngIf="!isStudentRole()">
                      <a class="dropdown-item"
                         [routerLink]="['/marksheet']">
 
@@ -249,7 +252,7 @@
 
 
             <!-- COURSE -->
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" *ngIf="canAccess('course')">
 
                <a class="nav-link dropdown-toggle text-white px-3 py-3"
                   href="#"
@@ -289,11 +292,12 @@
 
 
             <!-- SUBJECT -->
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown d-flex align-items-center" *ngIf="canAccess('subject')">
 
                <a class="nav-link dropdown-toggle text-white px-3 py-3"
                   href="#"
-                  data-bs-toggle="dropdown">
+                  data-bs-toggle="dropdown"
+                  style="white-space: nowrap;">
 
                   <i class="bi bi-journal-text me-1"></i>
                   Subject
@@ -303,7 +307,7 @@
                <ul class="dropdown-menu dropdown-menu-dark shadow border-0 rounded-3"
                   style="background:#1a2e4a">
 
-                  <li>
+                  <li *ngIf="!isStudentRole()">
                      <a class="dropdown-item"
                         [routerLink]="['/subject']">
 
@@ -329,11 +333,12 @@
 
 
             <!-- TIMETABLE -->
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown d-flex align-items-center" *ngIf="canAccess('timetable')">
 
                <a class="nav-link dropdown-toggle text-white px-3 py-3"
                   href="#"
-                  data-bs-toggle="dropdown">
+                  data-bs-toggle="dropdown"
+                  style="white-space: nowrap;">
 
                   <i class="bi bi-calendar3 me-1"></i>
                   Timetable
@@ -343,7 +348,7 @@
                <ul class="dropdown-menu dropdown-menu-dark shadow border-0 rounded-3"
                   style="background:#1a2e4a">
 
-                  <li>
+                  <li *ngIf="!isStudentRole()">
                      <a class="dropdown-item"
                         [routerLink]="['/timetable']">
 
@@ -369,11 +374,12 @@
 
 
             <!-- FACULTY -->
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" *ngIf="canAccess('faculty')">
 
                <a class="nav-link dropdown-toggle text-white px-3 py-3"
                   href="#"
-                  data-bs-toggle="dropdown">
+                  data-bs-toggle="dropdown"
+                  style="white-space: nowrap;">
 
                   <i class="bi bi-person-badge me-1"></i>
                   Faculty
@@ -408,10 +414,12 @@
             </li>
 
 
-            <!-- LOGOUT -->
-            <li class="nav-item ms-2">
+            </ul>
 
-               <a class="btn btn-sm btn-outline-light px-3 mt-2"
+            <!-- LOGOUT -->
+            <div class="ms-auto">
+
+               <a class="btn btn-sm btn-outline-light px-3"
                   (click)="logout()"
                   style="cursor:pointer;">
 
@@ -420,9 +428,9 @@
 
                </a>
 
-            </li>
+            </div>
 
-         </ul>
+         </div>
 
       </div>
 

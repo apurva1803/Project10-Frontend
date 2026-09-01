@@ -35,17 +35,17 @@
                     <table class="table table-hover align-middle mb-0">
                         <thead style="background: #e1e6f1;">
                             <tr class="text-center">
-                                <th style="width: 60px;"><input type="checkbox" class="form-check-input" [(ngModel)]="isMasterSel" (change)="checkUncheckAll($event)"></th>
-                                <th>S.No</th><th>Roll No</th><th>Name</th><th>Physics</th><th>Chemistry</th><th>Maths</th><th style="width: 100px;">Edit</th>
+                                <th *ngIf="!isStudentRole()" style="width: 60px;"><input type="checkbox" class="form-check-input" [(ngModel)]="isMasterSel" (change)="checkUncheckAll($event)"></th>
+                                <th>S.No</th><th>Roll No</th><th>Name</th><th>Physics</th><th>Chemistry</th><th>Maths</th><th *ngIf="!isStudentRole()" style="width: 100px;">Edit</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="text-center" *ngFor="let m of form.list; let i = index">
-                                <td><input type="checkbox" class="form-check-input" #checkboxes (change)="checklistUpdate()" [id]="m.id" [value]="isMasterSel"></td>
+                                <td *ngIf="!isStudentRole()"><input type="checkbox" class="form-check-input" #checkboxes (change)="checklistUpdate()" [id]="m.id" [value]="isMasterSel"></td>
                                 <td class="fw-semibold">{{ (form.pageNo * 5) + i + 1 }}</td>
                                 <td>{{ m.rollNo }}</td><td class="fw-semibold">{{ m.name }}</td><td>{{ m.physics }}</td>
                                 <td>{{ m.chemistry }}</td><td>{{ m.maths }}</td>
-                                <td><a (click)="forward('/marksheet/' + m.id)" class="btn btn-sm btn-outline-primary" style="cursor: pointer;"><i class="bi bi-pencil-square me-1"></i>Edit</a></td>
+                                <td *ngIf="!isStudentRole()"><a (click)="forward('/marksheet/' + m.id)" class="btn btn-sm btn-outline-primary" style="cursor: pointer;"><i class="bi bi-pencil-square me-1"></i>Edit</a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -57,9 +57,9 @@
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-md-3 text-start"><button class="btn btn-outline-primary px-4" (click)="previous()" [disabled]="form.pageNo == 0"><i class="bi bi-chevron-left me-1"></i>Previous</button></div>
-                    <div class="col-md-3 text-center mt-2 mt-md-0"><button class="btn btn-success px-4" (click)="forward('/marksheet')"><i class="bi bi-plus-circle me-1"></i>New</button></div>
-                    <div class="col-md-3 text-center mt-2 mt-md-0"><button class="btn btn-danger px-4" (click)="deleteMany()"><i class="bi bi-trash me-1"></i>Delete</button></div>
-                    <div class="col-md-3 text-end mt-2 mt-md-0"><button class="btn btn-outline-primary px-4" (click)="next()" [disabled]="form.nextListSize == 0">Next<i class="bi bi-chevron-right ms-1"></i></button></div>
+                    <div class="col-md-3 text-center mt-2 mt-md-0" *ngIf="!isStudentRole()"><button class="btn btn-success px-4" (click)="forward('/marksheet')"><i class="bi bi-plus-circle me-1"></i>New</button></div>
+                    <div class="col-md-3 text-center mt-2 mt-md-0" *ngIf="!isStudentRole()"><button class="btn btn-danger px-4" (click)="deleteMany()"><i class="bi bi-trash me-1"></i>Delete</button></div>
+                    <div class="col-md-3 ms-auto text-end mt-2 mt-md-0"><button class="btn btn-outline-primary px-4" (click)="next()" [disabled]="form.nextListSize == 0">Next<i class="bi bi-chevron-right ms-1"></i></button></div>
                 </div>
             </div>
         </div>

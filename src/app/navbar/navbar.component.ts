@@ -31,6 +31,39 @@ export class NavbarComponent {
     }
   }
 
+  getRole(): string {
+    return (localStorage.getItem('role') || '').trim().toLowerCase();
+  }
+
+  isStudentRole(): boolean {
+    return this.getRole() === 'student';
+  }
+
+  canAccess(moduleName: string): boolean {
+    const role = this.getRole();
+
+    if (role === 'admin') {
+      return true;
+    }
+
+    if (role === 'college') {
+      return ['college', 'student', 'marksheet', 'course', 'subject', 'timetable', 'faculty']
+        .includes(moduleName);
+    }
+
+    if (role === 'faculty') {
+      return ['student', 'subject', 'marksheet', 'timetable']
+        .includes(moduleName);
+    }
+
+    if (role === 'student') {
+      return ['subject', 'marksheet', 'timetable']
+        .includes(moduleName);
+    }
+
+    return false;
+  }
+
   logout() {
     var _self = this;
     this.httpService.get(this.endpoint + 'logout', function (res: any) {
