@@ -226,12 +226,12 @@
                <ul class="dropdown-menu dropdown-menu-dark shadow border-0 rounded-3"
                   style="background:#1a2e4a">
 
-                  <li *ngIf="!isStudentRole()">
+                  <li>
                      <a class="dropdown-item"
                         [routerLink]="['/marksheet']">
 
-                        <i class="bi bi-plus-circle me-2 text-success"></i>
-                        Add Marksheet
+                        <i class="bi bi-file-earmark me-2 text-success"></i>
+                        {{'AddMarksheet' }}
 
                      </a>
                   </li>
@@ -240,8 +240,28 @@
                      <a class="dropdown-item"
                         [routerLink]="['/marksheetlist']">
 
-                        <i class="bi bi-list-ul me-2 text-primary"></i>
-                        Marksheet List
+                        <i class="bi bi-clipboard me-2 text-primary"></i>
+                        {{'MarksheetList'}}
+
+                     </a>
+                  </li>
+
+                  <li>
+                     <a class="dropdown-item"
+                        [routerLink]="['/marksheetmeritlist']">
+
+                        <i class="bi bi-list-check me-2 text-info"></i>
+                        {{'MarksheetMeritList' }}
+
+                     </a>
+                  </li>
+
+                  <li>
+                     <a class="dropdown-item"
+                        [routerLink]="['/getmarksheet']">
+
+                        <i class="bi bi-file-earmark-arrow-down me-2 text-warning"></i>
+                        {{'Get Marksheet' }}
 
                      </a>
                   </li>

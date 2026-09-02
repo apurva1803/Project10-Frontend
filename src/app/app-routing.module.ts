@@ -13,6 +13,8 @@ import { CollegeListComponent } from './college/collegelist.component';
 import { CourseListComponent } from './course/courselist.component';
 import { FacultyListComponent } from './faculty/facultylist.component';
 import { MarksheetListComponent } from './marksheet/marksheetlist.component';
+import { MarksheetmeritlistComponent } from './marksheet/marksheetmeritlist.component';
+import { GetmarksheetComponent } from './marksheet/getmarksheet.component';
 import { RoleListComponent } from './role/rolelist.component';
 import { StudentListComponent } from './student/studentlist.component';
 import { SubjectListComponent } from './subject/subjectlist.component';
@@ -29,7 +31,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'Welcome'
+    redirectTo: 'dashboard'
   },
   {
     path: 'user',
@@ -109,6 +111,14 @@ const routes: Routes = [
     component: MarksheetListComponent
   },
   {
+    path: 'marksheetmeritlist',
+    component: MarksheetmeritlistComponent
+  },
+  {
+    path: 'getmarksheet',
+    component: GetmarksheetComponent
+  },
+  {
     path: 'role/:id',
     component: RoleComponent
   },
@@ -149,11 +159,6 @@ const routes: Routes = [
     component: UserListComponent
   },
   {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'dashboard'
-  },
-  {
     path: 'dashboard',
     component: DashboardComponent
   },
@@ -164,7 +169,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

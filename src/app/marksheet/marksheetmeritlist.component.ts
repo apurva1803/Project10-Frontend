@@ -54,10 +54,13 @@ export class MarksheetmeritlistComponent extends BaseCtl {
       return;
     }
 
-    this.httpservice.getReport(
-      "http://localhost:8080/jasper/report",
-      token
-    );
+    // Add query parameter for merit list report
+    const reportUrl = "http://localhost:8080/jasper/report?reportName=meritlist";
+    
+    console.log("Print Report - Token:", token ? "Present" : "Missing");
+    console.log("Report URL:", reportUrl);
+
+    this.httpservice.getReport(reportUrl, token);
   }
 
 }
