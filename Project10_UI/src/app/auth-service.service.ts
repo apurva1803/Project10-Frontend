@@ -41,15 +41,6 @@ export class AuthServiceService implements HttpInterceptor {
 
         }
 
-        if (error.status === 403) {
-          localStorage.clear();
-          this.router.navigate(['/login'], {
-            queryParams: {
-              errorMessage: 'Your Token is expired... plz login again..!!',
-            },
-          });
-          return EMPTY;
-        }
         return throwError(error);
       }),
     );

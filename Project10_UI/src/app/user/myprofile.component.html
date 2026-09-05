@@ -1,1 +1,165 @@
-<p>myprofile works!</p>
+
+<div class="container py-4 py-md-5" style="max-width: 580px;">
+    <div class="card border-0 shadow rounded-4 overflow-hidden">
+
+        <!-- Header -->
+        <div class="card-header text-white border-0 py-3 px-4"
+            style="background: linear-gradient(135deg, #0d2137 0%, #1565c0 100%);">
+
+            <h5 class="mb-0 fw-bold">
+                <i class="bi bi-person-circle me-2"></i>
+                My Profile
+            </h5>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body px-4 py-4">
+
+            <!-- Error Message -->
+            <div class="alert alert-danger py-2 d-flex justify-content-between align-items-center"
+                *ngIf="form.error && form.message">
+
+                <span>
+                    <i class="bi bi-exclamation-circle-fill me-2"></i>
+                    {{form.message}}
+                </span>
+
+                <button type="button" class="btn-close" (click)="form.message=''">
+                </button>
+            </div>
+
+            <!-- Success Message -->
+            <div class="alert alert-success py-2 d-flex justify-content-between align-items-center"
+                *ngIf="!form.error && form.message">
+
+                <span>
+                    <i class="bi bi-check-circle-fill me-2"></i>
+                    {{form.message}}
+                </span>
+
+                <button type="button" class="btn-close" (click)="form.message=''">
+                </button>
+            </div>
+
+            <!-- First Name -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">
+                    First Name <span class="text-danger">*</span>
+                </label>
+
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                    <input type="text" name="firstName" [(ngModel)]="form.data.firstName" placeholder="Enter First Name"
+                        class="form-control" required>
+                </div>
+
+                <div class="text-danger small mt-1">
+                    {{form.inputerror.firstName}}
+                </div>
+            </div>
+
+            <!-- Last Name -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">
+                    Last Name <span class="text-danger">*</span>
+                </label>
+
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                    <input type="text" name="lastName" [(ngModel)]="form.data.lastName" placeholder="Enter Last Name"
+                        class="form-control" required>
+                </div>
+
+                <div class="text-danger small mt-1">
+                    {{form.inputerror.lastName}}
+                </div>
+            </div>
+
+            <!-- Login Id -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">
+                    Login Id <span class="text-danger">*</span>
+                </label>
+
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person-badge"></i></span>
+                    <input type="text" name="loginId" [(ngModel)]="form.data.loginId" readonly class="form-control">
+                </div>
+
+                <div class="text-danger small mt-1">
+                    {{form.inputerror.loginId}}
+                </div>
+            </div>
+
+            <!-- DOB -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">
+                    Date of Birth <span class="text-danger">*</span>
+                </label>
+
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-calendar-event"></i></span>
+                    <input type="date" name="dob" [(ngModel)]="form.data.dob" [ngModel]="form.data.dob | date:'yyyy-MM-dd'"
+                        class="form-control" required>
+                </div>
+
+                <div class="text-danger small mt-1">
+                    {{form.inputerror.dob}}
+                </div>
+            </div>
+
+            <!-- Gender -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">
+                    Gender <span class="text-danger">*</span>
+                </label>
+
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-gender-ambiguous"></i></span>
+                    <select name="gender" [(ngModel)]="form.data.gender" class="form-select" required>
+
+                        <option value="">------------Select------------</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+
+                <div class="text-danger small mt-1">
+                    {{form.inputerror.gender}}
+                </div>
+            </div>
+
+            <!-- Mobile -->
+            <div class="mb-4">
+                <label class="form-label fw-semibold">
+                    Mobile <span class="text-danger">*</span>
+                </label>
+
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-phone"></i></span>
+                    <input type="text" name="phone" [(ngModel)]="form.data.phone" maxlength="10"
+                        placeholder="Enter Mobile No." class="form-control" required>
+                </div>
+
+                <div class="text-danger small mt-1">
+                    {{form.inputerror.phone}}
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-center gap-2 mt-4 pt-3 border-top">
+
+                <button class="btn btn-primary px-4" (click)="myProfile()">
+                    <i class="bi bi-save me-1"></i>
+                    Save
+                </button>
+
+            
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

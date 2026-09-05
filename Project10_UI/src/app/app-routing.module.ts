@@ -24,6 +24,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './login/signup.component';
 import { ForgotpasswordComponent } from './login/forgotpassword.component';
+import { ChangepasswordComponent } from './user/changepassword.component';
+import { MyprofileComponent } from './user/myprofile.component';
 
 
 
@@ -157,6 +159,14 @@ const routes: Routes = [
   {
     path: 'userlist',
     component: UserListComponent
+  },
+  {
+    path: 'myprofile/:id',
+    component: MyprofileComponent
+  },
+  {
+    path: 'changepassword',
+    component: ChangepasswordComponent
   },
   {
     path: 'dashboard',

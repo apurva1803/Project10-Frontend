@@ -35,7 +35,35 @@
     <!-- Feature Cards -->
     <div class="row g-4 mb-5 pb-4" *ngIf="isLogin()">
 
-        <div class="col-md-3 col-sm-6" *ngIf="canAccess('marksheet')">
+        <div class="col-md-3 col-sm-6" style="order: 1;" *ngIf="canAccess('role')">
+            <div class="card border-0 shadow-sm rounded-4 h-100 feature-card"
+                 [routerLink]="['/rolelist']" role="button" tabindex="0"
+                 (keydown.enter)="$event.preventDefault();" style="cursor: pointer;">
+                <div class="card-body text-center py-4">
+                    <div class="icon-circle bg-secondary bg-opacity-10 mx-auto mb-3">
+                        <i class="bi bi-shield-check fs-3 text-secondary"></i>
+                    </div>
+                    <h5 class="mb-2">Role</h5>
+                    <p class="text-muted small mb-0">Manage user roles.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6" style="order: 2;" *ngIf="canAccess('user')">
+            <div class="card border-0 shadow-sm rounded-4 h-100 feature-card"
+                 [routerLink]="['/userlist']" role="button" tabindex="0"
+                 (keydown.enter)="$event.preventDefault();" style="cursor: pointer;">
+                <div class="card-body text-center py-4">
+                    <div class="icon-circle bg-success bg-opacity-10 mx-auto mb-3">
+                        <i class="bi bi-person-lines-fill fs-3 text-success"></i>
+                    </div>
+                    <h5 class="mb-2">User</h5>
+                    <p class="text-muted small mb-0">Manage system users.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6" style="order: 5;" *ngIf="canAccess('marksheet')">
             <div class="card border-0 shadow-sm rounded-4 h-100 feature-card"
                  [routerLink]="['/marksheetlist']" role="button" tabindex="0"
                  (keydown.enter)="$event.preventDefault();" style="cursor: pointer;">
@@ -49,7 +77,7 @@
             </div>
         </div>
 
-        <div class="col-md-3 col-sm-6" *ngIf="canAccess('college')">
+        <div class="col-md-3 col-sm-6" style="order: 3;" *ngIf="canAccess('college')">
             <div class="card border-0 shadow-sm rounded-4 h-100 feature-card"
                  [routerLink]="['/collegelist']" role="button" tabindex="0"
                  (keydown.enter)="$event.preventDefault();" style="cursor: pointer;">
@@ -63,7 +91,7 @@
             </div>
         </div>
 
-        <div class="col-md-3 col-sm-6" *ngIf="canAccess('student')">
+        <div class="col-md-3 col-sm-6" style="order: 4;" *ngIf="canAccess('student')">
             <div class="card border-0 shadow-sm rounded-4 h-100 feature-card"
                  [routerLink]="['/studentlist']" role="button" tabindex="0"
                  (keydown.enter)="$event.preventDefault();" style="cursor: pointer;">
@@ -77,7 +105,7 @@
             </div>
         </div>
 
-        <div class="col-md-3 col-sm-6" *ngIf="canAccess('faculty')">
+        <div class="col-md-3 col-sm-6" style="order: 9;" *ngIf="canAccess('faculty')">
             <div class="card border-0 shadow-sm rounded-4 h-100 feature-card"
                  [routerLink]="['/facultylist']" role="button" tabindex="0"
                  (keydown.enter)="$event.preventDefault();" style="cursor: pointer;">
@@ -91,7 +119,7 @@
             </div>
         </div>
 
-        <div class="col-md-3 col-sm-6" *ngIf="canAccess('course')">
+        <div class="col-md-3 col-sm-6" style="order: 6;" *ngIf="canAccess('course')">
             <div class="card border-0 shadow-sm rounded-4 h-100 feature-card"
                  [routerLink]="['/courselist']" role="button" tabindex="0"
                  (keydown.enter)="$event.preventDefault();" style="cursor: pointer;">
@@ -105,7 +133,7 @@
             </div>
         </div>
 
-        <div class="col-md-3 col-sm-6" *ngIf="canAccess('subject')">
+        <div class="col-md-3 col-sm-6" style="order: 7;" *ngIf="canAccess('subject')">
             <div class="card border-0 shadow-sm rounded-4 h-100 feature-card"
                  [routerLink]="['/subjectlist']" role="button" tabindex="0"
                  (keydown.enter)="$event.preventDefault();" style="cursor: pointer;">
@@ -119,7 +147,7 @@
             </div>
         </div>
 
-        <div class="col-md-3 col-sm-6" *ngIf="canAccess('timetable')">
+        <div class="col-md-3 col-sm-6" style="order: 8;" *ngIf="canAccess('timetable')">
             <div class="card border-0 shadow-sm rounded-4 h-100 feature-card"
                  [routerLink]="['/timetablelist']" role="button" tabindex="0"
                  (keydown.enter)="$event.preventDefault();" style="cursor: pointer;">

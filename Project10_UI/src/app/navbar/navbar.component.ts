@@ -25,6 +25,7 @@ export class NavbarComponent {
     if (check != "null" && check != null) {
       this.form.data.fname = localStorage.getItem("fname");
       this.form.data.role = localStorage.getItem("role");
+      this.form.data.userId = localStorage.getItem("userId");
       return true;
     } else {
       return false;

@@ -50,158 +50,76 @@
             <ul class="navbar-nav align-items-center me-auto" style="gap: 0.1rem; margin-left: 0; white-space: nowrap; flex-wrap: nowrap;">
 
 
-            <!-- ROLE -->
-            <li class="nav-item dropdown" *ngIf="canAccess('role')">
+            <!-- ACADEMICS -->
+            <li class="nav-item dropdown order-2" *ngIf="canAccess('college') || canAccess('course') || canAccess('subject') || canAccess('timetable')">
 
                <a class="nav-link dropdown-toggle text-white px-3 py-3"
                   href="#"
                   data-bs-toggle="dropdown">
 
-                  <i class="bi bi-shield-check me-1"></i>
-                  Role
+                  <i class="bi bi-mortarboard me-1"></i>
+                  Academics
 
                </a>
 
                <ul class="dropdown-menu dropdown-menu-dark shadow border-0 rounded-3"
-                  style="background:#1a2e4a">
+                  style="background: transparent">
 
-                  <li>
-                     <a class="dropdown-item"
-                        [routerLink]="['/role']">
-
-                        <i class="bi bi-plus-circle me-2 text-success"></i>
-                        Add Role
-
-                     </a>
-                  </li>
-
-                  <li>
-                     <a class="dropdown-item"
-                        [routerLink]="['/rolelist']">
-
-                        <i class="bi bi-list-ul me-2 text-primary"></i>
-                        Role List
-
-                     </a>
-                  </li>
-
-               </ul>
-
-            </li>
-
-
-            <!-- USER -->
-            <li class="nav-item dropdown" *ngIf="canAccess('user')">
-
-               <a class="nav-link dropdown-toggle text-white px-3 py-3"
-                  href="#"
-                  data-bs-toggle="dropdown">
-
-                  <i class="bi bi-people me-1"></i>
-                  User
-
-               </a>
-
-               <ul class="dropdown-menu dropdown-menu-dark shadow border-0 rounded-3"
-                  style="background:#1a2e4a">
-
-                  <li>
-                     <a class="dropdown-item"
-                        [routerLink]="['/user']">
-
-                        <i class="bi bi-person-plus me-2 text-success"></i>
-                        Add User
-
-                     </a>
-                  </li>
-
-                  <li>
-                     <a class="dropdown-item"
-                        [routerLink]="['/userlist']">
-
-                        <i class="bi bi-person-lines-fill me-2 text-primary"></i>
-                        User List
-
-                     </a>
-                  </li>
-
-               </ul>
-
-            </li>
-
-
-            <!-- COLLEGE -->
-            <li class="nav-item dropdown" *ngIf="canAccess('college')">
-
-               <a class="nav-link dropdown-toggle text-white px-3 py-3"
-                  href="#"
-                  data-bs-toggle="dropdown">
-
-                  <i class="bi bi-building me-1"></i>
-                  College
-
-               </a>
-
-               <ul class="dropdown-menu dropdown-menu-dark shadow border-0 rounded-3"
-                  style="background:#1a2e4a">
-
-                  <li>
-                     <a class="dropdown-item"
-                        [routerLink]="['/college']">
-
+                  <li *ngIf="canAccess('college')">
+                     <a class="dropdown-item" [routerLink]="['/college']">
                         <i class="bi bi-plus-circle me-2 text-success"></i>
                         Add College
-
                      </a>
                   </li>
-
-                  <li>
-                     <a class="dropdown-item"
-                        [routerLink]="['/collegelist']">
-
-                        <i class="bi bi-list-ul me-2 text-primary"></i>
+                  <li *ngIf="canAccess('college')">
+                     <a class="dropdown-item" [routerLink]="['/collegelist']">
+                        <i class="bi bi-building me-2 text-primary"></i>
                         College List
-
                      </a>
                   </li>
 
-               </ul>
+                  <hr class="dropdown-divider">
 
-            </li>
-
-
-            <!-- STUDENT -->
-            <li class="nav-item dropdown" *ngIf="canAccess('student')">
-
-               <a class="nav-link dropdown-toggle text-white px-3 py-3"
-                  href="#"
-                  data-bs-toggle="dropdown">
-
-                  <i class="bi bi-person me-1"></i>
-                  Student
-
-               </a>
-
-               <ul class="dropdown-menu dropdown-menu-dark shadow border-0 rounded-3"
-                  style="background:#1a2e4a">
-
-                  <li>
-                     <a class="dropdown-item"
-                        [routerLink]="['/student']">
-
+                  <li *ngIf="canAccess('course')">
+                     <a class="dropdown-item" [routerLink]="['/course']">
                         <i class="bi bi-plus-circle me-2 text-success"></i>
-                        Add Student
-
+                        Add Course
+                     </a>
+                  </li>
+                  <li *ngIf="canAccess('course')">
+                     <a class="dropdown-item" [routerLink]="['/courselist']">
+                        <i class="bi bi-book me-2 text-primary"></i>
+                        Course List
                      </a>
                   </li>
 
-                  <li>
-                     <a class="dropdown-item"
-                        [routerLink]="['/studentlist']">
+                  <hr class="dropdown-divider">
 
-                        <i class="bi bi-list-ul me-2 text-primary"></i>
-                        Student List
+                  <li *ngIf="canAccess('subject') && !isStudentRole()">
+                     <a class="dropdown-item" [routerLink]="['/subject']">
+                        <i class="bi bi-plus-circle me-2 text-success"></i>
+                        Add Subject
+                     </a>
+                  </li>
+                  <li *ngIf="canAccess('subject')">
+                     <a class="dropdown-item" [routerLink]="['/subjectlist']">
+                        <i class="bi bi-journal-text me-2 text-primary"></i>
+                        Subject List
+                     </a>
+                  </li>
 
+                  <hr class="dropdown-divider">
+
+                  <li *ngIf="canAccess('timetable') && !isStudentRole()">
+                     <a class="dropdown-item" [routerLink]="['/timetable']">
+                        <i class="bi bi-plus-circle me-2 text-success"></i>
+                        Add Timetable
+                     </a>
+                  </li>
+                  <li *ngIf="canAccess('timetable')">
+                     <a class="dropdown-item" [routerLink]="['/timetablelist']">
+                        <i class="bi bi-calendar3 me-2 text-primary"></i>
+                        Timetable List
                      </a>
                   </li>
 
@@ -211,7 +129,7 @@
 
 
             <!-- MARKSHEET -->
-            <li class="nav-item dropdown d-flex align-items-center" *ngIf="canAccess('marksheet')">
+            <li class="nav-item dropdown d-flex align-items-center order-1" *ngIf="canAccess('marksheet')">
 
                <a class="nav-link dropdown-toggle text-white px-3 py-3"
                   href="#"
@@ -224,14 +142,14 @@
                </a>
 
                <ul class="dropdown-menu dropdown-menu-dark shadow border-0 rounded-3"
-                  style="background:#1a2e4a">
+                  style="background: transparent">
 
                   <li>
                      <a class="dropdown-item"
                         [routerLink]="['/marksheet']">
 
-                        <i class="bi bi-file-earmark me-2 text-success"></i>
-                        {{'AddMarksheet' }}
+                        <i class="bi bi-plus-circle me-2 text-success"></i>
+                        Add Marksheet
 
                      </a>
                   </li>
@@ -241,27 +159,31 @@
                         [routerLink]="['/marksheetlist']">
 
                         <i class="bi bi-clipboard me-2 text-primary"></i>
-                        {{'MarksheetList'}}
+                        Marksheet List
 
                      </a>
                   </li>
+
+                  <hr class="dropdown-divider">
 
                   <li>
                      <a class="dropdown-item"
                         [routerLink]="['/marksheetmeritlist']">
 
                         <i class="bi bi-list-check me-2 text-info"></i>
-                        {{'MarksheetMeritList' }}
+                        Marksheet Merit List
 
                      </a>
                   </li>
+
+                  <hr class="dropdown-divider">
 
                   <li>
                      <a class="dropdown-item"
                         [routerLink]="['/getmarksheet']">
 
                         <i class="bi bi-file-earmark-arrow-down me-2 text-warning"></i>
-                        {{'Get Marksheet' }}
+                        Get Marksheet
 
                      </a>
                   </li>
@@ -271,161 +193,76 @@
             </li>
 
 
-            <!-- COURSE -->
-            <li class="nav-item dropdown" *ngIf="canAccess('course')">
+            <!-- PEOPLE -->
+            <li class="nav-item dropdown order-3" *ngIf="canAccess('role') || canAccess('user') || canAccess('student') || canAccess('faculty')">
 
                <a class="nav-link dropdown-toggle text-white px-3 py-3"
                   href="#"
                   data-bs-toggle="dropdown">
 
-                  <i class="bi bi-book me-1"></i>
-                  Course
+                  <i class="bi bi-people me-1"></i>
+                  People
 
                </a>
 
                <ul class="dropdown-menu dropdown-menu-dark shadow border-0 rounded-3"
-                  style="background:#1a2e4a">
+                  style="background: transparent">
 
-                  <li>
-                     <a class="dropdown-item"
-                        [routerLink]="['/course']">
-
+                  <li *ngIf="canAccess('role')">
+                     <a class="dropdown-item" [routerLink]="['/role']">
                         <i class="bi bi-plus-circle me-2 text-success"></i>
-                        Add Course
-
+                        Add Role
+                     </a>
+                  </li>
+                  <li *ngIf="canAccess('role')">
+                     <a class="dropdown-item" [routerLink]="['/rolelist']">
+                        <i class="bi bi-shield-check me-2 text-primary"></i>
+                        Role List
                      </a>
                   </li>
 
-                  <li>
-                     <a class="dropdown-item"
-                        [routerLink]="['/courselist']">
+                  <hr class="dropdown-divider">
 
-                        <i class="bi bi-list-ul me-2 text-primary"></i>
-                        Course List
-
+                  <li *ngIf="canAccess('user')">
+                     <a class="dropdown-item" [routerLink]="['/user']">
+                        <i class="bi bi-person-plus me-2 text-success"></i>
+                        Add User
+                     </a>
+                  </li>
+                  <li *ngIf="canAccess('user')">
+                     <a class="dropdown-item" [routerLink]="['/userlist']">
+                        <i class="bi bi-person-lines-fill me-2 text-primary"></i>
+                        User List
                      </a>
                   </li>
 
-               </ul>
+                  <hr class="dropdown-divider">
 
-            </li>
-
-
-            <!-- SUBJECT -->
-            <li class="nav-item dropdown d-flex align-items-center" *ngIf="canAccess('subject')">
-
-               <a class="nav-link dropdown-toggle text-white px-3 py-3"
-                  href="#"
-                  data-bs-toggle="dropdown"
-                  style="white-space: nowrap;">
-
-                  <i class="bi bi-journal-text me-1"></i>
-                  Subject
-
-               </a>
-
-               <ul class="dropdown-menu dropdown-menu-dark shadow border-0 rounded-3"
-                  style="background:#1a2e4a">
-
-                  <li *ngIf="!isStudentRole()">
-                     <a class="dropdown-item"
-                        [routerLink]="['/subject']">
-
+                  <li *ngIf="canAccess('student')">
+                     <a class="dropdown-item" [routerLink]="['/student']">
                         <i class="bi bi-plus-circle me-2 text-success"></i>
-                        Add Subject
-
+                        Add Student
+                     </a>
+                  </li>
+                  <li *ngIf="canAccess('student')">
+                     <a class="dropdown-item" [routerLink]="['/studentlist']">
+                        <i class="bi bi-person me-2 text-primary"></i>
+                        Student List
                      </a>
                   </li>
 
-                  <li>
-                     <a class="dropdown-item"
-                        [routerLink]="['/subjectlist']">
+                  <hr class="dropdown-divider">
 
-                        <i class="bi bi-list-ul me-2 text-primary"></i>
-                        Subject List
-
-                     </a>
-                  </li>
-
-               </ul>
-
-            </li>
-
-
-            <!-- TIMETABLE -->
-            <li class="nav-item dropdown d-flex align-items-center" *ngIf="canAccess('timetable')">
-
-               <a class="nav-link dropdown-toggle text-white px-3 py-3"
-                  href="#"
-                  data-bs-toggle="dropdown"
-                  style="white-space: nowrap;">
-
-                  <i class="bi bi-calendar3 me-1"></i>
-                  Timetable
-
-               </a>
-
-               <ul class="dropdown-menu dropdown-menu-dark shadow border-0 rounded-3"
-                  style="background:#1a2e4a">
-
-                  <li *ngIf="!isStudentRole()">
-                     <a class="dropdown-item"
-                        [routerLink]="['/timetable']">
-
-                        <i class="bi bi-plus-circle me-2 text-success"></i>
-                        Add Timetable
-
-                     </a>
-                  </li>
-
-                  <li>
-                     <a class="dropdown-item"
-                        [routerLink]="['/timetablelist']">
-
-                        <i class="bi bi-list-ul me-2 text-primary"></i>
-                        Timetable List
-
-                     </a>
-                  </li>
-
-               </ul>
-
-            </li>
-
-
-            <!-- FACULTY -->
-            <li class="nav-item dropdown" *ngIf="canAccess('faculty')">
-
-               <a class="nav-link dropdown-toggle text-white px-3 py-3"
-                  href="#"
-                  data-bs-toggle="dropdown"
-                  style="white-space: nowrap;">
-
-                  <i class="bi bi-person-badge me-1"></i>
-                  Faculty
-
-               </a>
-
-               <ul class="dropdown-menu dropdown-menu-dark shadow border-0 rounded-3"
-                  style="background:#1a2e4a">
-
-                  <li>
-                     <a class="dropdown-item"
-                        [routerLink]="['/faculty']">
-
+                  <li *ngIf="canAccess('faculty')">
+                     <a class="dropdown-item" [routerLink]="['/faculty']">
                         <i class="bi bi-plus-circle me-2 text-success"></i>
                         Add Faculty
-
                      </a>
                   </li>
-
-                  <li>
-                     <a class="dropdown-item"
-                        [routerLink]="['/facultylist']">
-
-                        <i class="bi bi-list-ul me-2 text-primary"></i>
+                  <li *ngIf="canAccess('faculty')">
+                     <a class="dropdown-item" [routerLink]="['/facultylist']">
+                        <i class="bi bi-person-badge me-2 text-primary"></i>
                         Faculty List
-
                      </a>
                   </li>
 
@@ -436,18 +273,41 @@
 
             </ul>
 
-            <!-- LOGOUT -->
-            <div class="ms-auto">
+            <!-- PROFILE -->
+            <div class="dropdown ms-auto">
+               <a class="nav-link dropdown-toggle text-white px-3 py-2"
+                  href="#"
+                  data-bs-toggle="dropdown">
 
-               <a class="btn btn-sm btn-outline-light px-3"
-                  (click)="logout()"
-                  style="cursor:pointer;">
-
-                  <i class="bi bi-box-arrow-right me-1"></i>
-                  Logout
+                  <i class="bi bi-person-circle me-1"></i>
+                  Profile
 
                </a>
 
+               <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark shadow border-0 rounded-3"
+                  style="background: transparent">
+
+                  <li>
+                     <a class="dropdown-item" [routerLink]="['/myprofile', form.data.userId]">
+                        <i class="bi bi-person me-2"></i>
+                        My Profile
+                     </a>
+                  </li>
+                  <li>
+                     <a class="dropdown-item" [routerLink]="['/changepassword']">
+                        <i class="bi bi-key me-2"></i>
+                        Change Password
+                     </a>
+                  </li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li>
+                     <a class="dropdown-item" (click)="logout()" style="cursor: pointer;">
+                        <i class="bi bi-box-arrow-right me-2"></i>
+                        Logout
+                     </a>
+                  </li>
+
+               </ul>
             </div>
 
          </div>

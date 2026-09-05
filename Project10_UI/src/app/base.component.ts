@@ -12,7 +12,7 @@ export class BaseCtl implements OnInit {
         message: null, //error or success message
         data: { id: null }, //form data
         searchParams: {}, //search form
-        preload: [], // preload data
+        preload: { roleList: [] }, // preload data
         list: [], // search list 
         pageNo: 0,
         nextListSize: 0
@@ -109,7 +109,8 @@ export class BaseCtl implements OnInit {
 
     deleteMany(id: any) {
         var _self = this;
-        this.serviceLocator.httpService.post(_self.api.deleteMany + "/" + id, this.form.searchParams, function (res: any) {
+        var deleteUrl = _self.api.deleteMany + "/" + id + "?pageNo=" + _self.form.pageNo;
+        this.serviceLocator.httpService.post(deleteUrl, this.form.searchParams, function (res: any) {
             _self.form.message = '';
             _self.form.list = [];
             if (res.success) {
@@ -122,6 +123,8 @@ export class BaseCtl implements OnInit {
                 _self.form.message = res.result.message;
             }
         });
+
+        
     }
     
     forward(page: any) {
